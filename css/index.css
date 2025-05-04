@@ -134,12 +134,12 @@
 .card{
     background-color: var(--branco);
     width: 23%;
-    height: 55vh;
+    height: fit-content;
     border-radius: 10px;
 }
 
 .cardTop{
-    height: 40%;
+    height: 25vh;
     background-color: var(--cinza);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -152,6 +152,7 @@
 
 .cardBottom{
     padding: 10px;
+    height: fit-content;
 }
 
 .cardBottom button{
@@ -177,6 +178,7 @@
     justify-content: space-around;
     height: fit-content;
     background-color: var(--azul);
+    padding: 30px;
 }
 
 .container-secaoDuvida img{
