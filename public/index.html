@@ -148,22 +148,25 @@
 ];
 
 
-    function gerarCuriosidade(){
-        var mensagem1 = document.getElementById('mensagem1');
-        var mensagem2 = document.getElementById('mensagem2');
-        var mensagem3 = document.getElementById('mensagem3');
-        var aleatorio1 = Math.floor(Math.random() * curiosidadesTenis.length);
-        var aleatorio2 = Math.floor(Math.random() * curiosidadesTenis.length);
-        var aleatorio3 = Math.floor(Math.random() * curiosidadesTenis.length);
+    function gerarCuriosidade() {
+    var mensagem1 = document.getElementById('mensagem1');
+    var mensagem2 = document.getElementById('mensagem2');
+    var mensagem3 = document.getElementById('mensagem3');
 
-        var curiosidadeAleatoria1 = curiosidadesTenis[aleatorio1]
-        var curiosidadeAleatoria2 = curiosidadesTenis[aleatorio2]
-        var curiosidadeAleatoria3 = curiosidadesTenis[aleatorio3]
+    var usadas = []; // array para guardar as curiosidades escolhidas
 
-        mensagem1.innerHTML = `<span style="font-weight: bold">1ª Curiosidade:</span> ${curiosidadeAleatoria1}`;
-        mensagem2.innerHTML = `<span style="font-weight: bold">2ª Curiosidade:</span> ${curiosidadeAleatoria2}`;
-        mensagem3.innerHTML = `<span style="font-weight: bold">3ª Curiosidade:</span> ${curiosidadeAleatoria3}`;
+    while (usadas.length < 3) { // while para armazenar no array as escolhidas  
+        var aleatorio = Math.floor(Math.random() * curiosidadesTenis.length);
+        if (!usadas.includes(aleatorio)) {
+            usadas.push(aleatorio);
+        }
     }
+
+    mensagem1.innerHTML = `<span style="font-weight: bold">1ª Curiosidade:</span> ${curiosidadesTenis[usadas[0]]}`;
+    mensagem2.innerHTML = `<span style="font-weight: bold">2ª Curiosidade:</span> ${curiosidadesTenis[usadas[1]]}`;
+    mensagem3.innerHTML = `<span style="font-weight: bold">3ª Curiosidade:</span> ${curiosidadesTenis[usadas[2]]}`;
+}
+
 
 
 </script>
