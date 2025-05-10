@@ -72,6 +72,7 @@
     height: fit-content;
 }
 
+
 .containerCuriosidade img{
     width: 30vw;
     height: auto;
@@ -87,6 +88,12 @@
     border-radius: 15px;
     gap: 20px;
     padding: 20px;
+}
+
+#mensagem1, #mensagem2, #mensagem3{
+    background-color: #c1c1c1;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .geradorCuriosidade p{

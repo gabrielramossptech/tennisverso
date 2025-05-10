@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="gerarCuriosidade()">
     
     <header>
         <a href="./index.html"><img src="./assets/imgs/logo.png" alt="Logo"></a>
@@ -52,7 +52,9 @@
         <section class="containerCuriosidade">
             <div class="geradorCuriosidade">
                 <button onclick="gerarCuriosidade()">Gerar outra curiosidade</button>
-                <p>Você sabia que o tênis entrou nas Olimpíadas em 1896, nos primeiros Jogos Olímpicos da Era Moderna, em 1896, em Atenas na Grécia.</p>
+                <p id="mensagem1"></p>
+                <p id="mensagem2"></p>
+                <p id="mensagem3"></p>
 
             </div>
 
@@ -119,3 +121,49 @@
 
 </body>
 </html>
+
+<script>
+
+    const curiosidadesTenis = [
+    "O tênis moderno surgiu no final do século XIX, com o tênis de borracha chamado 'Plimsoll'.",
+    "Roger Federer é o único jogador masculino a ter atingido 20 títulos de Grand Slam.",
+    "O primeiro torneio de tênis foi realizado em 1877 em Wimbledon, Londres.",
+    "A Wilson, uma das principais marcas de tênis, fabricou a primeira bola de tênis em 1912.",
+    "O tênis é um dos poucos esportes que pode ser jogado individualmente ou em duplas.",
+    "Os jogadores de tênis profissionalmente podem correr até 5km em uma partida de 2 horas.",
+    "A raquete de tênis foi originalmente feita de madeira, mas hoje é fabricada com materiais como carbono e grafite.",
+    "Serena Williams tem mais títulos de Grand Slam em simples do que qualquer outra jogadora na Era Aberta.",
+    "No tênis, um jogo pode ser decidido por um único ponto, como no caso dos tie-breaks.",
+    "A quadra de tênis pode ser de diferentes superfícies: grama, saibro, ou piso duro, o que afeta o estilo de jogo.",
+    "O Grand Slam do tênis é composto pelos torneios de Wimbledon, Roland Garros, US Open e Australian Open.",
+    "A primeira raquete de tênis foi criada no século XVI, mas era feita de madeira e corda de tripa de animal.",
+    "O primeiro jogo de tênis na grama aconteceu em Wimbledon em 1877.",
+    "O famoso tênis 'Converse Chuck Taylor' foi originalmente criado para o basquete, mas se tornou popular no tênis.",
+    "Em 1984, John McEnroe foi expulso de Wimbledon por comportamentos inadequados em quadra.",
+    "Atenção ao fato de que no tênis, o saque começa sempre no lado direito da quadra.",
+    "Os jogadores de tênis têm que se adaptar rapidamente às mudanças de temperatura e umidade, pois isso afeta a bola.",
+    "O tênis é um dos esportes mais caros para se praticar profissionalmente, devido aos custos de equipamentos e viagens.",
+    "Em 2004, Rafael Nadal venceu seu primeiro título de Grand Slam em Roland Garros aos 18 anos.",
+    "O tênis teve um grande crescimento nos anos 1970, graças a estrelas como Billie Jean King e Björn Borg."
+];
+
+
+    function gerarCuriosidade(){
+        var mensagem1 = document.getElementById('mensagem1');
+        var mensagem2 = document.getElementById('mensagem2');
+        var mensagem3 = document.getElementById('mensagem3');
+        var aleatorio1 = Math.floor(Math.random() * curiosidadesTenis.length);
+        var aleatorio2 = Math.floor(Math.random() * curiosidadesTenis.length);
+        var aleatorio3 = Math.floor(Math.random() * curiosidadesTenis.length);
+
+        var curiosidadeAleatoria1 = curiosidadesTenis[aleatorio1]
+        var curiosidadeAleatoria2 = curiosidadesTenis[aleatorio2]
+        var curiosidadeAleatoria3 = curiosidadesTenis[aleatorio3]
+
+        mensagem1.innerHTML = `<span style="font-weight: bold">1ª Curiosidade:</span> ${curiosidadeAleatoria1}`;
+        mensagem2.innerHTML = `<span style="font-weight: bold">2ª Curiosidade:</span> ${curiosidadeAleatoria2}`;
+        mensagem3.innerHTML = `<span style="font-weight: bold">3ª Curiosidade:</span> ${curiosidadeAleatoria3}`;
+    }
+
+
+</script>
