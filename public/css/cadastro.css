@@ -1,0 +1,74 @@
+:root{
+    --verde: #1B5E20;
+    --laranja: #EF6C00;
+    --branco: #F9F9F9;
+    --cinza: #2E2E2E;
+    --azul: #203B57;
+}
+
+.cadastro{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    overflow: hidden;
+}
+
+main{
+    display: flex;
+}
+
+aside{
+    width: 30%;
+    height: 88.5vh;
+    background-image: url(../assets/imgs/quadraCadastro.png);
+    background-size: cover;
+}
+
+aside img{
+    width: auto;
+    height: 100%;
+}
+
+.cadastro{
+    background-color: var(--laranja);
+    width: 70%;
+    height: 88.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campo p{
+    font-weight: bold;
+    color: var(--branco);
+}
+
+.loading-div {
+  width: 50px;
+  display: none;
+}
+
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
+
+#div_erros_login {
+  display: none
+}
+
+/* FORMULARIO */
+
+.alerta_erro{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro #mensagem_erro{
+  font-weight: 500;
+  font-size: 20px;
+}
