@@ -1,0 +1,83 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 85%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+.container:hover > :not(:hover){
+    opacity: .75;
+}
+
+.card {
+  background-color: var(--branco);
+  flex: 1 1 calc(25% - 20px); /* 4 por linha com gap */
+  max-width: calc(25% - 20px);
+  min-width: 250px;
+  height: fit-content;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: .35s;
+}
+
+.card:hover{
+    transform: scale(1.04);
+}
+
+.cardTop{
+    height: 150px;
+    background-color: var(--cinza);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--branco);
+}
+
+.cardBottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 25vh;
+    background-color: #e3e3e3;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+button{
+    background-color: var(--cinza);
+    color: var(--branco);
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: .3s;
+    font-size: 1rem;
+}
+
+button:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+}
