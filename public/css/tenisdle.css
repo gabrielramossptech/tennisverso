@@ -1,0 +1,113 @@
+:root {
+  /* Paleta de cores */
+  --verde: #1b5e20;
+  --laranja: #ef6c00;
+  --cinza: #2e2e2e;
+  --branco: #f9f9f9;
+  --azul: #203b57;
+
+  /* Tipografia */
+  --fonte-destaque: "Montserrat";
+
+  /* Tamanhos de fonte */
+  --titulo: 2rem;
+  --subtitulo: 1.5rem;
+  --paragrafo: 1rem;
+}
+
+body{
+    height: fit-content;
+}
+
+main{
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    background-color: #ebebeb;
+    width: 45vw;
+    height: fit-content;
+    padding: 50px;
+    text-align: center;
+    border-radius: 20px;
+    position: absolute;
+    top: 20%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.container h1{
+    color: var(--azul);
+}
+
+.container p{
+    margin-top: 10px;
+}
+
+.inputs{
+    display: flex;
+    justify-content: space-around;
+    height: 45px;
+    margin-top: 10px;
+}
+
+input{
+    width: 80%;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.container .inputs button{
+    background-color: var(--verde);
+    width: 15%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+
+/* Tabela */
+table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid var(--cinza);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: var(--azul);
+      color: white;
+    }
+
+    .tentativa th{
+        background-color: #e1e1e1;
+        color: var(--cinza);
+    }
+
+    .tentativa .certa{
+        background-color: var(--verde);
+        color: var(--branco);
+    }
+
+.container button{
+    background-color: var(--azul);
+    color: var(--branco);
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}

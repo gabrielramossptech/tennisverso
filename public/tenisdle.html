@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TennisVerso | Início</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/tenisdle.css">
+
+    <!-- Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <a href="./index.html"><img src="./assets/imgs/logo.png" alt="Logo"></a>
+
+        <nav>
+            <ul>
+                <li><a href="./index.html">Início</a></li>
+                <li><a href="./artigos.html">Artigos</a></li>
+                <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
+                <li><a href="./login.html">Entrar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="container">
+            <h1>Quem é o tenista?</h1>
+            <p>Digite o nome de um dos tenistas e tente adivinhar!</p>
+
+            <div class="inputs">
+                <input type="text" id="input_tentativa" placeholder="Ex: João Fonseca">
+                <button onclick="tentar()">Adivinhar</button>
+            </div>
+
+            <table id="tabelaTentativas">
+                <thead id="thead">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Nacionalidade</th>
+                        <th>Mão</th>
+                        <th>Grand Slams</th>
+                    </tr>
+                </thead>
+                <tbody id="tentativas"></tbody>
+            </table>
+
+            <!-- <div id="mensagemFinal">🎉 Parabéns, você ganhou!</div> -->
+
+            <button>Tente novamente</button>
+        </div>
+
+    </main>
+
+</body>
+</html>
+
+<script>
+
+    const tenistas = [
+      ["Rafael Nadal", 37, "Espanhol", "Canhoto", 22],
+      ["Roger Federer", 42, "Suíço", "Destro", 20],
+      ["Novak Djokovic", 36, "Sérvio", "Destro", 24],
+      ["Serena Williams", 41, "Americana", "Destro", 23],
+      ["Carlos Alcaraz", 21, "Espanhol", "Destro", 2]
+    ];
+
+    let alvo = tenistas[Math.floor(Math.random() * tenistas.length)];
+
+    function tentar(){
+        var tentativa = input_tentativa.value;
+        var thead = document.getElementById('thead');
+        var validacaoExisteTenista = false
+        var indexTenista = Number;
+
+        for(var i = 0; i < tenistas.length; i++){
+            if(tentativa == tenistas[i][0]){
+                validacaoExisteTenista = true;
+                indexTenista = i
+                break
+            }
+        }
+
+        if(validacaoExisteTenista){
+
+        var nome = tenistas[indexTenista][0];
+        var idade = tenistas[indexTenista][1];
+        var nacionalidade = tenistas[indexTenista][2];
+        var mao = tenistas[indexTenista][3];
+        var torneio = tenistas[indexTenista][4];
+
+            thead.innerHTML += `
+            <tr class="tentativa">
+                <th id="ceulaNome">${nome}</th>
+                <th id="ceulaIdade">${idade}</th>
+                <th id="ceulaNacionalidade">${nacionalidade}</th>
+                <th id="ceulaMao">${mao}</th>
+                <th id="ceulaTorneio">${torneio}</th>
+            </tr>
+            `
+        }
+
+        if(nome == alvo[0]){
+            var campoNome = document.getElementById('ceulaNome')
+            campoNome.classList.add("certa")
+        }
+
+        if(idade == alvo[1]){
+            var campoIdade = document.getElementById('ceulaIdade')
+            campoIdade.classList.add("certa")
+        }
+
+        if(nacionalidade == alvo[2]){
+            var campoNacionalidade = document.getElementById('ceulaNacionalidade')
+            campoNacionalidade.classList.add("certa")
+        }
+
+        if(mao == alvo[3]){
+            var campoMao = document.getElementById('ceulaMao')
+            campoMao.classList.add("certa")
+        }
+
+        if(torneio == alvo[4]){
+            var campoTorneoio = document.getElementById('ceulaTorneio')
+            campoTorneoio.classList.add("certa")
+        }
+
+    }
+
+</script>
