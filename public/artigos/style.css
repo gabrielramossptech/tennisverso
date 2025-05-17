@@ -1,0 +1,48 @@
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    width: 80%;
+    height: fit-content;
+    padding: 50px;
+}
+
+h1{
+    font-size: 3.5rem;
+}
+
+h2{
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+p{
+    font-size: 1.3rem;
+}
+
+.container-golpes {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.container-golpes h1 {
+  font-size: 3rem;
+  margin-bottom: 40px;
+}
+
+.container-golpes h2 {
+  font-size: 2rem;
+  color: #1B5E20;
+  margin-top: 30px;
+}
+
+.container-golpes p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  line-height: 1.6;
+}

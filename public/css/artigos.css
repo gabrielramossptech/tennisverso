@@ -26,11 +26,20 @@ main {
     opacity: .75;
 }
 
-.card {
+.container a{
+  text-decoration: none;
+  color: #000;
+  max-width: calc(25% - 20px);
+  min-width: 250px;
+  height: fit-content;
+}
+
+a .card {
+  text-decoration: none;
   background-color: var(--branco);
   flex: 1 1 calc(25% - 20px); /* 4 por linha com gap */
   max-width: calc(25% - 20px);
-  min-width: 250px;
+  min-width: 290px;
   height: fit-content;
   border-radius: 10px;
   display: flex;
@@ -59,7 +68,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 25vh;
+    height: 28vh;
     background-color: #e3e3e3;
     padding: 10px;
     border-radius: 0 0 10px 10px;
