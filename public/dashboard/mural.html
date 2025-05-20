@@ -9,19 +9,17 @@
     <title>TênisVerso | Partida</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
 
-    <div class="janela">
 
 
         <div class="header-left">
@@ -58,28 +56,38 @@
 
 
             <div class="avisos">
-                <div id="alerta">
-                </div>
+            <div id="alerta">
+            </div>
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1>Adicionar uma partida</h1>
                     <div class="div-form">
-                        
-                            <select name="" id="select_quadra">
-                                <option value="1">Privada</option>
-                                <option value="2">Pública</option>
-                                <option value="3">Clube</option>
-                            </select>
-                            <input id="input_gamesUsuario" maxlength="100" type="number" placeholder="Seus games">
-                            <input id="input_gamesAdversario" maxlength="100" type="number" placeholder="Games adversários">
+                        <div class="campo">
+                        <p>Quadra:</p>
+                        <select name="" id="select_quadra">
+                            <option value="1">Privada</option>
+                            <option value="2">Pública</option>
+                            <option value="3">Clube</option>
+                        </select>
+                        </div>
+
+                        <div class="campo">
+                            <p>Games ganhos:</p>
+                            <input id="input_gamesUsuario" min="0" type="number" placeholder="Seus games">
+                        </div>
+
+                        <div class="campo">
+                            <p>Games perdidos:</p>
+                            <input id="input_gamesAdversario" min="0" type="number" placeholder="Games adversários">
+                        </div>
+
+                        <div class="campo">
+                            <p>Data:</p>
                             <input id="input_data" maxlength="100" type="date" placeholder="Data partida">
-                            <select name="input_resultado" id="input_resultado">
-                                <option value="vitoria">Vitória</option>
-                                <option value="derrota">Derrota</option>
-                                <option disabled selected>Selecione o resultado</option>
-                            </select>
-                            <button onclick="publicar()">Enviar</button>
+                            <button onclick="publicar()">Registrar partida</button>
+                        </div>
+
                     </div>
-                    <h1>Mural de Avisos</h1>
+                    <h1>Histórico de partidas</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
                         </div>
@@ -87,10 +95,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
 
 </body>
 
@@ -107,19 +111,36 @@
     function publicar() {
     var idUsuario = sessionStorage.ID_USUARIO;
     var fkQuadra = document.getElementById("select_quadra").value;
-    var resultado = document.getElementById("input_resultado").value;
+    var resultado = "";
     var gamesUsuario = document.getElementById("input_gamesUsuario").value;
     var gamesAdversario = document.getElementById("input_gamesAdversario").value;
     var dataPartida = document.getElementById("input_data").value;
 
+    if (!gamesUsuario || !gamesAdversario || !dataPartida) {
+        alert("Preencha todos os campos antes de registrar a partida.");
+        return false;
+    }
+
+    if (gamesUsuario < 0 || gamesAdversario < 0) {
+        alert("Games não podem ser negativos.");
+        return false;
+    }
+
+    
     var corpo = {
         idUsuario: sessionStorage.ID_USUARIO,
         fkQuadra: Number(fkQuadra),
-        resultado: resultado,
+        resultado: "",
         gamesUsuario: Number(gamesUsuario),
         gamesAdversario: Number(gamesAdversario),
         dataPartida: dataPartida
     };
+    
+    if(gamesUsuario > gamesAdversario){
+        corpo.resultado = "vitoria"
+    }else{
+        corpo.resultado = "derrota"
+    }
 
     fetch(`/avisos/publicar/${idUsuario}`, {
         method: "POST",
@@ -173,7 +194,7 @@
     }
 
     function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
+        fetch(`/avisos/listar/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -226,7 +247,7 @@
 
                         btnDeletar.className = "publicacao-btn-editar"
                         btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+                        btnDeletar.setAttribute("onclick", `deletar('${publicacao.idAviso}')`);
 
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanTitulo);

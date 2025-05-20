@@ -1,7 +1,11 @@
 var avisoModel = require("../models/avisoModel");
 
 function listar(req, res) {
-    avisoModel.listar().then(function (resultado) {
+    const idUsuario = req.params.idUsuario; // <-- Pega da URL
+
+    console.log("ID do usuário recebido:", idUsuario); // debug!
+
+    avisoModel.listar(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
