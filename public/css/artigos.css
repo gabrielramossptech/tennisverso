@@ -23,7 +23,7 @@ main {
 }
 
 .container:hover > :not(:hover){
-    opacity: .75;
+    opacity: .8;
 }
 
 .container a{
@@ -49,7 +49,7 @@ a .card {
 }
 
 .card:hover{
-    transform: scale(1.04);
+    transform: scale(1.03);
 }
 
 .cardTop{

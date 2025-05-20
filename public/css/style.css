@@ -36,8 +36,19 @@ header{
 }
 
 header img{
-    width: 200px;
+    width: 50px;
     height: auto;
+}
+
+header a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--branco);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 nav ul{
@@ -54,7 +65,8 @@ nav ul li a{
     font-family: var(--fonte-destaque);
 }
 nav ul li a:hover{
-    transform: scale(1.2);
+    transform: scale(1.07);
+    color: var(--laranja);
 }
 
 footer{
