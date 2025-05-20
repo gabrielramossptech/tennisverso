@@ -2,7 +2,7 @@
 
 **Tênis para todos. Conheça o esporte que o Brasil ainda vai amar.**
 
-O TênisVerse é um projeto acadêmico desenvolvido com o objetivo de divulgar e informar sobre o esporte tênis, oferecendo uma experiência interativa e educativa para quem quer conhecer mais sobre esse universo ainda pouco explorado no Brasil.
+O TênisVerse é um projeto acadêmico desenvolvido individualmente com o objetivo de divulgar e informar sobre o esporte tênis, oferecendo uma experiência interativa e educativa para quem quer conhecer mais sobre esse universo ainda pouco explorado no Brasil.
 
 ---
 
@@ -11,7 +11,7 @@ O TênisVerse é um projeto acadêmico desenvolvido com o objetivo de divulgar e
 - ✅ Cadastro e login de usuários;
 - ✅ Dashboard personalizada com estatísticas de partidas;
 - ✅ Cadastro e visualização de partidas de tênis;
-- ✅ Jogo interativo estilo Wordle baseado em tenistas;
+- ✅ Jogo interativo estilo Wordle/Termo baseado em tenistas;
 - ✅ Artigos educativos sobre o esporte;
   - Regras básicas;
   - Tipos de bolinha e quadra;
@@ -27,7 +27,6 @@ O TênisVerse é um projeto acadêmico desenvolvido com o objetivo de divulgar e
 - HTML5
 - CSS3
 - JavaScript (puro)
-- Responsividade com Flexbox/Grid
 
 ### Back-end
 - Node.js + Express
