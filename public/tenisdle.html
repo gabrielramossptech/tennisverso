@@ -25,16 +25,18 @@
   </head>
   <body>
     <header>
-        <a href="./index.html"><img src="./assets/icon/raquete.png" alt="Logo">TenisVerso</a>
+      <a href="./index.html"
+        ><img src="./assets/icon/raquete.png" alt="Logo" />TenisVerso</a
+      >
 
-        <nav>
-            <ul>
-                <li><a href="./index.html">Início</a></li>
-                <li><a href="./artigos.html">Artigos</a></li>
-                <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
-                <li><a href="./login.html">Entrar</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Início</a></li>
+          <li><a href="./artigos.html">Artigos</a></li>
+          <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
+          <li><a href="./login.html">Entrar</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
@@ -57,7 +59,7 @@
               <th>Nome</th>
               <th>Idade</th>
               <th>Nacionalidade</th>
-              <th>Mão</th>
+              <th>Gênero</th>
               <th>Grand Slams</th>
             </tr>
           </thead>
@@ -75,11 +77,11 @@
 <script>
   // array com os tenistas possíveis
   const tenistas = [
-    ["Rafael Nadal", 37, "Espanhol", "Canhoto", 22],
-    ["Roger Federer", 42, "Suíço", "Destro", 20],
-    ["Novak Djokovic", 36, "Sérvio", "Destro", 24],
-    ["Serena Williams", 41, "Americana", "Destro", 23],
-    ["Carlos Alcaraz", 21, "Espanhol", "Destro", 2],
+    ["Rafael Nadal", 37, "Espanhol", "Masculino", 22],
+    ["Roger Federer", 42, "Suíço", "Masculino", 20],
+    ["Novak Djokovic", 36, "Sérvio", "Masculino", 24],
+    ["Serena Williams", 41, "Americana", "Feminino", 23],
+    ["Carlos Alcaraz", 21, "Espanhol", "Masculino", 2],
   ];
 
   // escolhendo um tenista aleatório
@@ -93,12 +95,13 @@
     nome: false,
     idade: false,
     nacionalidade: false,
-    mao: false,
+    genero: false,
     grandSlams: false,
   };
 
   // função para resetar o jogo e começar dnv
   function reiniciar() {
+    mensagemFinal.innerHTML = "";
     tbody.innerHTML = "";
     arrayTentativas = [];
     alvo = tenistas[Math.floor(Math.random() * tenistas.length)];
@@ -106,7 +109,7 @@
       nome: false,
       idade: false,
       nacionalidade: false,
-      mao: false,
+      genero: false,
       grandSlams: false,
     };
   }
@@ -131,17 +134,23 @@
       let nome = tenistas[indexTenista][0];
       let idade = tenistas[indexTenista][1];
       let nacionalidade = tenistas[indexTenista][2];
-      let mao = tenistas[indexTenista][3];
+      let genero = tenistas[indexTenista][3];
       let torneio = tenistas[indexTenista][4];
 
       // atualizando os acertos
       if (nome == alvo[0]) acertos.nome = true;
       if (idade == alvo[1]) acertos.idade = true;
       if (nacionalidade == alvo[2]) acertos.nacionalidade = true;
-      if (mao == alvo[3]) acertos.mao = true;
+      if (genero == alvo[3]) acertos.genero = true;
       if (torneio == alvo[4]) acertos.grandSlams = true;
 
-      if(acertos.nome && acertos.idade && acertos.nacionalidade && acertos.mao && acertos.grandSlams){
+      if (
+        acertos.nome &&
+        acertos.idade &&
+        acertos.nacionalidade &&
+        acertos.genero &&
+        acertos.grandSlams
+      ) {
         var mensagem = document.getElementById("mensagemFinal");
         mensagem.style.display = "block";
 
@@ -150,7 +159,15 @@
       }
 
       // adicionando a tentativa numa array
-      arrayTentativas.push([nome, idade, nacionalidade, mao, torneio]);
+      if (
+        arrayTentativas.some((t) => t[0].toLowerCase() === nome.toLowerCase())
+      ) {
+        alert("Você já tentou esse tenista!");
+        input_tentativa.value = "";
+        return;
+      }
+
+      arrayTentativas.push([nome, idade, nacionalidade, genero, torneio]);
 
       // limpa tabela e reconstrói com as tentativas ao contrário, para a última tentativa ficar no topo
       tbody.innerHTML = "";
@@ -159,16 +176,32 @@
 
         tentativas += `
             <tr class="tentativa">
-                <th class="ceulaNome ${acertos.nome && tentativaAtual[0] == alvo[0] ? "certa" : ""}">
+                <th class="ceulaNome ${
+                  acertos.nome && tentativaAtual[0] == alvo[0] ? "certa" : ""
+                }">
                     ${tentativaAtual[0]}</th>
-                <th class="ceulaIdade ${acertos.idade && tentativaAtual[1] == alvo[1] ? "certa" : ""}">
+                <th class="ceulaIdade ${
+                  acertos.idade && tentativaAtual[1] == alvo[1] ? "certa" : ""
+                }">
                     ${tentativaAtual[1]}</th>
-                <th class="ceulaNacionalidade ${acertos.nacionalidade && tentativaAtual[2] == alvo[2]? "certa": ""}">${tentativaAtual[2]}</th>
-                <th class="ceulaMao ${acertos.mao && tentativaAtual[3] == alvo[3] ? "certa" : ""}">
+                <th class="ceulaNacionalidade ${
+                  acertos.nacionalidade && tentativaAtual[2] == alvo[2]
+                    ? "certa"
+                    : ""
+                }">${tentativaAtual[2]}</th>
+                <th class="ceulagenero ${
+                  acertos.genero && tentativaAtual[3] == alvo[3] ? "certa" : ""
+                }">
                     ${tentativaAtual[3]}</th>
-                <th class="ceulaTorneio ${acertos.grandSlams && tentativaAtual[4] == alvo[4]? "certa": ""}">
+                <th class="ceulaTorneio ${
+                  acertos.grandSlams && tentativaAtual[4] == alvo[4]
+                    ? "certa"
+                    : ""
+                }">
                     ${tentativaAtual[4]}</th>
             </tr>`;
+
+        input_tentativa.focus();
       }
 
       tbody.innerHTML = tentativas;

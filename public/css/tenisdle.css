@@ -1,10 +1,10 @@
 :root {
   /* Paleta de cores */
-  --verde: #1b5e20;
-  --laranja: #ef6c00;
-  --cinza: #2e2e2e;
-  --branco: #f9f9f9;
-  --azul: #203b57;
+  --verde: #1d8d24;
+    --laranja: #ef6c00;
+    --cinza: #2e2e2e;
+    --branco: #f9f9f9;
+    --azul: #2a629f;
 
   /* Tipografia */
   --fonte-destaque: "Montserrat";
@@ -92,8 +92,8 @@ table {
     }
 
     .tentativa th{
-        background-color: #e1e1e1;
-        color: var(--cinza);
+        background-color: #b71111;
+        color: var(--branco);
     }
 
     .tentativa .certa{
