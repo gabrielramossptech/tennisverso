@@ -27,23 +27,16 @@
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav">
-
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
-                
 
-            </div>
-
-            <div class="btn-nav-white">
                 <a href="./mural.html">
                     <h3>Partidas</h3>
                 </a>
-            </div>
 
             <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
+                <h3><img src="../assets/icon/logout.svg" alt="" srcset="">Sair</h3>
             </div>
 
         </div>
@@ -256,6 +249,13 @@
                         divButtons.appendChild(btnEditar);
                         divButtons.appendChild(btnDeletar);
                         feed.appendChild(divPublicacao);
+                        // Verifica se o resultado é derrota
+if(publicacao.Resultado.toLowerCase() === "derrota") {
+  divPublicacao.classList.add("borda-vermelha");
+  btnEditar.classList.add("botao-derrota");
+  btnDeletar.classList.add("botao-derrota");
+}
+
                     }
 
                     finalizarAguardar();

@@ -23,12 +23,17 @@ body {
   width: 100%;
 }
 
+.container h1{
+  margin: 40px 0 40px 0;
+}
+
 .div-form{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  gap: 10px;
 }
 
 .campo{
@@ -101,13 +106,13 @@ input:focus, select:focus{
 
 .publicacao-btn-editar {
   cursor: pointer;
-  border: 0;
+  border: 2px solid #2ecc71;
   border-radius: 5px;
   font-weight: 600;
   font-size: 14px;
   padding: 5px 8px;
   color: white;
-  background-color: var(--verde);
+  background-color: #2ecc7155;
   width: 80px;
 }
 
@@ -118,8 +123,10 @@ input:focus, select:focus{
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  border-bottom: 3px solid var(--verde);
+  border: 3px solid var(--verde);
+  border-radius: 10px;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 .publicacao>*:not(:last-child) {
@@ -137,7 +144,7 @@ input:focus, select:focus{
 }
 
 .div-results .feed-container {
-  background-color: #212124;
+  background-color: transparent;
   border-radius: 5px;
   margin-bottom: 80px;
 }
@@ -153,10 +160,6 @@ input:focus, select:focus{
 
 /* pagina graficos */
 
-.dash-header {
-  background-color: #212124;
-}
-
 .dash {
   display: flex;
   flex-direction: column;
@@ -164,7 +167,7 @@ input:focus, select:focus{
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #dbdbdb;
+  background-color: var(--cinza);
   height: 100vh;
   padding: 10px;
   gap: 10px;
@@ -182,7 +185,7 @@ input:focus, select:focus{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--branco);
+  background-color: #777777;
   width: 19%;
   height: 100%;
   border-radius: 10px;
@@ -202,7 +205,7 @@ input:focus, select:focus{
   justify-content: center;
   width: 59.5%;
   height: 100%;
-  background-color: var(--branco);
+  background-color: #777777;
   border-radius: 10px;
 }
 
@@ -212,7 +215,7 @@ input:focus, select:focus{
   justify-content: center;
   width: 39.5%;
   height: 100%;
-  background-color: var(--branco);
+  background-color: #777777;
   border-radius: 10px;
 }
 
@@ -443,7 +446,7 @@ canvas {
 
 .dash-right {
   display: flex;
-  width: 70%;
+  width: 75%;
   height: fit-content;
   background-color: #161618;
   position: relative;
@@ -473,45 +476,58 @@ canvas {
   font-weight: 800;
 }
 
-.btn-nav {
-  width: 40%;
+.header-left a, .btn-logout{
+  width: 10vw;
+  text-align: center;
   color: white;
-  background-color: var(--verde);
+  background-color: transparent;
+  border: 2px solid var(--branco);
   border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
+  padding: 10px 20px;
+  transition: .3s;
+  cursor: pointer;
 }
 
-.btn-nav-white {
-  width: 40%;
-  background-color: white;
-  border: 3px solid var(--verde);
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
+.header-left a:hover{
+  transform: scale(1.05);
+  border: 2px solid #2ecc71;
+  background-color: #2ecc7155;
 }
 
-.btn-nav-white h3 {
-  color: var(--verde);
-  padding: 0;
-  margin: 0;
-}
-
-.btn-nav h3,
+.header-left h3,
 .btn-logout h3 {
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
-.btn-logout {
-  margin: 0;
-  padding: 0;
-  width: 40%;
-  background-color: var(--verde);
-  color: white;
+
+/* Estilização da scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cinza); /* trilho da scrollbar */
   border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
-  margin-bottom: 100px;
-  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e8b57; 
+  border-radius: 10px;
+}
+
+.borda-vermelha {
+  border: 2px solid #e63946;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.botao-derrota, .btn-logout:hover{
+  border: 2px solid #e63946;
+  background-color: #8b000075;
 }
