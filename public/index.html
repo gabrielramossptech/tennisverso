@@ -34,13 +34,13 @@
 
     <main>
 
-        <section class="banner">
+        <section class="banner" id="section-banner">
             <h1>
                 TênisVerso: onde começa sua jornada pelas quadras
             </h1>
         </section>
 
-        <section class="container-tenisBrasil">
+        <section class="container-tenisBrasil" id="section-tenisBrasil">
             <img src="./assets/imgs/tenisBrasil.png" alt="" srcset="">
 
             <div class="tenisBrasil">
@@ -49,7 +49,7 @@
             </div>
         </section>
 
-        <section class="containerCuriosidade">
+        <section class="containerCuriosidade" id="section-curiosidades">
             <div class="geradorCuriosidade">
                 <button onclick="gerarCuriosidade()">Gerar outra curiosidade</button>
                 <p id="mensagem1"></p>
@@ -61,7 +61,7 @@
             <img src="./assets/imgs/tenisMulher.png" alt="" srcset="">
         </section>
 
-        <section class="container-descubraMais">
+        <section class="container-descubraMais" id="section-artigos">
             <h1>Descubra mais</h1>
 
             <div class="container-cards">
@@ -117,7 +117,7 @@
             </div>
         </section>
 
-        <section class="container-secaoDuvida">
+        <section class="container-secaoDuvida" id="section-duvidas">
             <img src="./assets/imgs/duvida.png" alt="">
 
             <div class="container-duvidas">
@@ -139,7 +139,24 @@
     </main>
 
     <footer>
-        FOOTER
+        <div class="container-logo">
+            <a href="./index.html"><img src="./assets/icon/raquete.png" alt="Logo">TenisVerso</a>
+        </div>
+
+        <div class="container-links">
+            <ul>
+                <li><h3>Links rápidos:</h3></li>
+                <li><a href="#section-banner">Página inicial</a></li>
+                <li><a href="#section-tenisBrasil">Tênis no Brasil</a></li>
+                <li><a href="#section-curiosidades">Curiosidades</a></li>
+                <li><a href="#section-artigos">Artigos destaque</a></li>
+                <li><a href="#section-duvidas">Dúvidas frequentes</a></li>
+            </ul>
+        </div>
+
+        <div class="container-links">
+            <h3>Desenvolvido por: <br>Gabriel Ramos</h3>
+        </div>
     </footer>
 
 </body>
