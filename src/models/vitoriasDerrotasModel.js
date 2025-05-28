@@ -3,12 +3,11 @@ var database = require("../database/config")
 function listar(idUsuario) {
     var instrucao = `
     select 
-    round(
-        sum(resultado = 'vitoria') / count(*) * 100
-    ) as percentualVitorias
+    round(sum(p.resultado = 'vitoria') / count(*) * 100) as percentualVitorias,
+    (select count(*) from partida where fkUsuario = ${idUsuario}) as partidasTotais,
+    count(*) as partidasJogadas7Dias
 from (
-    select 
-        date(dtPartida) as data
+    select date(dtPartida) as data
     from partida
     where fkUsuario = ${idUsuario}
     group by date(dtPartida)

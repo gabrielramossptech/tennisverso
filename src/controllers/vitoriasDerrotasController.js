@@ -1,8 +1,10 @@
 var vitoriasDerrotasModel = require("../models/vitoriasDerrotasModel");
 
-function listar(req, res, idUsuario) {
+function listar(req, res) {
+    var idUsuario = req.params.idUsuario
     vitoriasDerrotasModel.listar(idUsuario).then(function(resultado){
         res.status(200).json(resultado);
+        console.log(resultado[0].percentualVitorias)
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
     })

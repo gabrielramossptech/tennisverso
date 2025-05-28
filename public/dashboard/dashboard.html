@@ -31,7 +31,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="obterIndicadores()">
 
     <div class="janela">
         <div class="header-left">
@@ -66,17 +66,17 @@
                 </div>
 
                 <div class="indicador verde">
-                    <h1>90%</h1>
+                    <h1 id="percentualVitorias">Carregando...</h1>
                     <h3>de taxa de vitória atual</h3>
                 </div>
 
                 <div class="indicador amarelo">
-                    <h1>75</h1>
+                    <h1 id="partidasTotais">Carregando..</h1>
                     <h3>Vitórias totais</h3>
                 </div>
 
                 <div class="indicador vermelho">
-                    <h1>16</h1>
+                    <h1 id="partidasJogadas7Dias">Carregando...</h1>
                     <h3>Partidas jogadas nos últimos 7 dias</h3>
                 </div>
             </div>
@@ -126,6 +126,29 @@
 </html>
 
 <script>
+
+       var idUsuario = Number(sessionStorage.ID_USUARIO)
+       console.log(idUsuario)
+
+    function obterIndicadores(){
+        fetch(`/vitoriasderrotas/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {  
+                    var percentual= document.getElementById('percentualVitorias')
+                    var partidasTotais = document.getElementById('partidasTotais')
+                    var partidasJogadas7Dias = document.getElementById('partidasJogadas7Dias')
+                    percentual.innerHTML = `${resposta[0].percentualVitorias}%`
+                    partidasTotais.innerHTML = `${resposta[0].partidasTotais}`
+                    partidasJogadas7Dias.innerHTML = `${resposta[0].partidasJogadas7Dias}`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
     const ctx = document.getElementById('myChart');
 
