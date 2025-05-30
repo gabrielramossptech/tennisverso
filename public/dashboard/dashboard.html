@@ -9,7 +9,7 @@
     <title>AquaTech | Dashboards</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
@@ -18,12 +18,15 @@
     <!-- Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <!-- Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -31,7 +34,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="obterIndicadores()">
+<body onload="obterIndicadores(), obterGraficos()">
 
     <div class="janela">
         <div class="header-left">
@@ -41,13 +44,13 @@
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
+            <a href="./dashboard.html">
+                <h3>Gráficos</h3>
+            </a>
 
-                <a href="./mural.html">
-                    <h3>Partidas</h3>
-                </a>
+            <a href="./mural.html">
+                <h3>Partidas</h3>
+            </a>
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3><img src="../assets/icon/logout.svg" alt="" srcset="">Sair</h3>
@@ -113,11 +116,11 @@
             </section>
 
             <!-- <div class="btns-dash" id="btnAquario"> -->
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
-            <div id="graficos">
-            </div>
+            <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
         </div>
+        <div id="graficos">
+        </div>
+    </div>
     </div>
 
 
@@ -127,14 +130,14 @@
 
 <script>
 
-       var idUsuario = Number(sessionStorage.ID_USUARIO)
-       console.log(idUsuario)
+    var idUsuario = Number(sessionStorage.ID_USUARIO)
+    console.log(idUsuario)
 
-    function obterIndicadores(){
+    function obterIndicadores() {
         fetch(`/vitoriasderrotas/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
-                response.json().then(function (resposta) {  
-                    var percentual= document.getElementById('percentualVitorias')
+                response.json().then(function (resposta) {
+                    var percentual = document.getElementById('percentualVitorias')
                     var partidasTotais = document.getElementById('partidasTotais')
                     var partidasJogadas7Dias = document.getElementById('partidasJogadas7Dias')
                     percentual.innerHTML = `${resposta[0].percentualVitorias}%`
@@ -150,80 +153,128 @@
             });
     }
 
+    var resposta3 = []
+    var listaVitorias3 = []
+    var listaDerrotas3 = []
+    function obterGraficos() {
+        /* Fetch do gráfico 3 */
+        fetch(`/vitoriasderrotas/listarGrafico3/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                    resposta3 = resposta
+
+
+                    const ctx3 = document.getElementById('myChart3');
+
+                    new Chart(ctx3, {
+                        type: 'bar',
+                        data: {
+                            labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
+                            datasets: [
+                                {
+                                    label: "Vitórias",
+                                    data: [resposta[0].vitorias, resposta[1].vitorias, resposta[2].vitorias, resposta[3].vitorias, resposta[4].vitorias, resposta[5].vitorias, resposta[6].vitorias],
+                                    borderWidth: 2,
+                                    borderColor: '#2ecc71',
+                                    backgroundColor: '#2ecc7155',
+                                },
+                                {
+                                    label: "Derrotas",
+                                    data: [resposta[0].derrotas, resposta[1].derrotas, resposta[2].derrotas, resposta[3].derrotas, resposta[4].derrotas, resposta[5].derrotas, resposta[6].derrotas],
+                                    borderWidth: 2,
+                                    borderColor: '#e63946',
+                                    backgroundColor: '#8b000075',
+                                }
+                            ],
+                        },
+                    }
+                    );
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
     const ctx = document.getElementById('myChart');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'],
-      datasets: [{
-        label: 'Partidas jogadas',
-        data: [3, 2, 0, 1, 3, 4],
-        borderWidth: 2,
-        borderColor: '#457b9d',
-        backgroundColor: '#457b9d75',
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-  /* Gráfico 2 */
-  const ctx2 = document.getElementById('myChart2');
-
-  new Chart(ctx2, {
-    type: 'line',
-    data: {
-      labels: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'],
-      datasets: [{
-        label: '% de vitórias',
-        data: [20, 35, 38, 47, 53, 62, 60],
-        borderWidth: 2,
-        borderColor: '#457b9d',
-        backgroundColor: '#457b9d75'
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-  /* Gráfico 3 */
-  
-  const ctx3 = document.getElementById('myChart3');
-
-  new Chart(ctx3, {
-    type: 'bar',
-    data: {
-      labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
-      datasets: [
-        {
-          label: "Vitórias",
-          data: [2, 1, 0, 3, 1, 2, 0],
-          borderWidth: 2,
-          borderColor: '#2ecc71',
-          backgroundColor: '#2ecc7155',
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'],
+            datasets: [{
+                label: 'Partidas jogadas',
+                data: [3, 2, 0, 1, 3, 4],
+                borderWidth: 2,
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d75',
+            }]
         },
-        {
-          label: "Derrotas",
-          data: [1, 1, 2, 0, 1, 1, 0],
-          borderWidth: 2,
-          borderColor: '#e63946',
-          backgroundColor: '#8b000075',
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      ],
-    },
-    }
-  );
+    });
+
+    /* Gráfico 2 */
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'],
+            datasets: [{
+                label: '% de vitórias',
+                data: [20, 35, 38, 47, 53, 62, 60],
+                borderWidth: 2,
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d75'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    /* Gráfico 3 */
+
+    /* const ctx3 = document.getElementById('myChart3');
+  
+    new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
+        datasets: [
+          {
+            label: "Vitórias",
+            data: [2, 1, 0, 3, 1, 2, 0],
+            borderWidth: 2,
+            borderColor: '#2ecc71',
+            backgroundColor: '#2ecc7155',
+          },
+          {
+            label: "Derrotas",
+            data: [1, 1, 2, 0, 1, 1, 0],
+            borderWidth: 2,
+            borderColor: '#e63946',
+            backgroundColor: '#8b000075',
+          }
+        ],
+      },
+      }
+    ); */
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 

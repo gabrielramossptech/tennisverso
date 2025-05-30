@@ -20,6 +20,29 @@ join partida p on date(p.dtPartida) = ultimos7dias.data and p.fkUsuario = ${idUs
     return database.executar(instrucao);
 }
 
+function listarGrafico3(idUsuario) {
+    var instrucao = `
+    select 
+    data, 
+    sum(resultado = 'vitoria') as vitorias,
+    sum(resultado = 'derrota') as derrotas 
+from (
+    select 
+        date(dtPartida) as data,
+        resultado
+    from partida
+    where fkUsuario = ${idUsuario}
+    group by data, resultado, idPartida
+    order by data desc
+) as sub
+group by data
+order by data desc 
+limit 7;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function cadastrar(nome) {
     var instrucao = `
         INSERT INTO carro (nome) VALUES ('${nome}');
@@ -30,5 +53,6 @@ function cadastrar(nome) {
 
 module.exports = {
     cadastrar,
-    listar
+    listar,
+    listarGrafico3
 };
