@@ -154,6 +154,7 @@
     }
 
     var listaResposta1 = []
+    var listaResposta2 = []
     var resposta2 = []
     var resposta3 = []
     function obterGraficos() {
@@ -166,26 +167,64 @@
 
                     const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [listaResposta1[0].data, listaResposta1[1].data, listaResposta1[2].data, listaResposta1[3].data, listaResposta1[4].data, listaResposta1[5].data, listaResposta1[6].data],
-            datasets: [{
-                label: '% de vitórias',
-                data: [listaResposta1[0].percentualVitorias, listaResposta1[1].percentualVitorias, listaResposta1[2].percentualVitorias, listaResposta1[3].percentualVitorias, listaResposta1[4].percentualVitorias, listaResposta1[5].percentualVitorias, listaResposta1[6].percentualVitorias],
-                borderWidth: 2,
-                borderColor: '#457b9d',
-                backgroundColor: '#457b9d75',
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: [listaResposta1[0].data, listaResposta1[1].data, listaResposta1[2].data, listaResposta1[3].data, listaResposta1[4].data, listaResposta1[5].data, listaResposta1[6].data],
+                            datasets: [{
+                                label: '% de vitórias',
+                                data: [listaResposta1[0].percentualVitorias, listaResposta1[1].percentualVitorias, listaResposta1[2].percentualVitorias, listaResposta1[3].percentualVitorias, listaResposta1[4].percentualVitorias, listaResposta1[5].percentualVitorias, listaResposta1[6].percentualVitorias],
+                                borderWidth: 2,
+                                borderColor: '#457b9d',
+                                backgroundColor: '#457b9d75',
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
             }
-        }
-    });
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        /* Fetch do gráfico 2 */
+        fetch(`/vitoriasderrotas/listarGrafico2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta2) {
+                    console.log(resposta2)
+                    listaResposta2 = resposta2
+
+                    const ctx2 = document.getElementById('myChart2');
+
+                    new Chart(ctx2, {
+                        type: 'bar',
+                        data: {
+                            labels: [listaResposta2[0].data, listaResposta2[1].data, listaResposta2[2].data, listaResposta2[3].data, listaResposta2[4].data, listaResposta2[5].data, listaResposta2[6].data],
+                            datasets: [{
+                                label: 'Partidas jogadas',
+                                data: [listaResposta2[0].qntPartidas, listaResposta2[1].qntPartidas, listaResposta2[2].qntPartidas, listaResposta2[3].qntPartidas, listaResposta2[4].qntPartidas, listaResposta2[5].qntPartidas, listaResposta2[6].qntPartidas],
+                                borderWidth: 2,
+                                borderColor: '#457b9d',
+                                backgroundColor: '#457b9d75'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -238,58 +277,6 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-
-    /* Gráfico 2 */
-    const ctx2 = document.getElementById('myChart2');
-
-    new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'],
-            datasets: [{
-                label: 'Partidas jogadas',
-                data: [40, 35, 38, 47, 53, 62, 60],
-                borderWidth: 2,
-                borderColor: '#457b9d',
-                backgroundColor: '#457b9d75'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    /* Gráfico 3 */
-
-    /* const ctx3 = document.getElementById('myChart3');
-  
-    new Chart(ctx3, {
-      type: 'bar',
-      data: {
-        labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
-        datasets: [
-          {
-            label: "Vitórias",
-            data: [2, 1, 0, 3, 1, 2, 0],
-            borderWidth: 2,
-            borderColor: '#2ecc71',
-            backgroundColor: '#2ecc7155',
-          },
-          {
-            label: "Derrotas",
-            data: [1, 1, 2, 0, 1, 1, 0],
-            borderWidth: 2,
-            borderColor: '#e63946',
-            backgroundColor: '#8b000075',
-          }
-        ],
-      },
-      }
-    ); */
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 

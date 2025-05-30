@@ -40,6 +40,24 @@ LIMIT 7;
     return database.executar(instrucao);
 }
 
+function listarGrafico2(idUsuario) {
+    var instrucao = `
+    select 
+    date_format(data, '%d/%m') as data,
+    count(*) as qntPartidas
+from (
+    select date(dtPartida) as data
+    from partida
+    where fkUsuario = ${idUsuario}
+) as datas
+group by data
+order by data desc
+limit 7;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function listarGrafico3(idUsuario) {
     var instrucao = `
     select 
@@ -75,5 +93,6 @@ module.exports = {
     cadastrar,
     listar,
     listarGrafico,
+    listarGrafico2,
     listarGrafico3
 };

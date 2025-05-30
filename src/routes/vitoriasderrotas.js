@@ -17,6 +17,11 @@ router.get("/listarGrafico/:idUsuario", function (req, res, idUsuario) {
     vitoriasDerrotasController.listarGrafico(req, res, idUsuario);
 });
 
+router.get("/listarGrafico2/:idUsuario", function (req, res, idUsuario) {
+    var idUsuario = req.params.idUsuario;
+    vitoriasDerrotasController.listarGrafico2(req, res, idUsuario);
+});
+
 router.get("/listarGrafico3/:idUsuario", function (req, res, idUsuario) {
     var idUsuario = req.params.idUsuario;
     vitoriasDerrotasController.listarGrafico3(req, res, idUsuario);
