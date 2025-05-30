@@ -10,6 +10,16 @@ function listar(req, res) {
     })
 }
 
+function listarGrafico(req, res) {
+    var idUsuario = req.params.idUsuario
+    vitoriasDerrotasModel.listarGrafico(idUsuario).then(function(resultado){
+        res.status(200).json(resultado);
+        console.log(resultado)
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 function listarGrafico3(req, res) {
     var idUsuario = req.params.idUsuario
     vitoriasDerrotasModel.listarGrafico3(idUsuario).then(function(resultado){
@@ -36,6 +46,7 @@ function cadastrar(req, res) {
 
 module.exports = {
     listar,
+    listarGrafico,
     listarGrafico3,
     cadastrar
 }

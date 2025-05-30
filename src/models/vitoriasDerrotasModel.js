@@ -20,10 +20,30 @@ join partida p on date(p.dtPartida) = ultimos7dias.data and p.fkUsuario = ${idUs
     return database.executar(instrucao);
 }
 
+function listarGrafico(idUsuario) {
+    var instrucao = `
+    select 
+    date_format(data, '%d/%m') as data,
+    round(sum(resultado = 'vitoria') / COUNT(*) * 100) as percentualVitorias
+from (
+    select 
+        date(dtPartida) as data,
+        resultado
+    from partida
+    where fkUsuario = ${idUsuario}
+) AS sub
+GROUP BY data
+ORDER BY data DESC
+LIMIT 7;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function listarGrafico3(idUsuario) {
     var instrucao = `
     select 
-    data, 
+    date_format(data, '%d/%m') as data, 
     sum(resultado = 'vitoria') as vitorias,
     sum(resultado = 'derrota') as derrotas 
 from (
@@ -54,5 +74,6 @@ function cadastrar(nome) {
 module.exports = {
     cadastrar,
     listar,
+    listarGrafico,
     listarGrafico3
 };
