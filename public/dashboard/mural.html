@@ -75,6 +75,7 @@
                             <p>Data:</p>
                             <input id="input_data" maxlength="100" type="date" placeholder="Data partida">
                             <button onclick="publicar()">Registrar partida</button>
+                            <button onclick="redirecionar()">Visualizar painel de indicadores</button>
                         </div>
 
                     </div>
@@ -94,6 +95,10 @@
 <script>
     
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function redirecionar(){
+        window.location = "dashboard.html"
+    }
 
     function limparFormulario() {
         document.getElementById("form_postagem").reset();

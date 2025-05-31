@@ -186,7 +186,8 @@ input:focus, select:focus{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f1f1f1;
+  background-color: #6c757d7c;
+  border: 2px solid #6c757d;
   color: var(--branco);
   text-align: center;
   width: 24%;
@@ -268,7 +269,11 @@ input:focus, select:focus{
 }
 
 .ranks{
-  font-size: 1.2rem;
+  font-size: .9rem;
+}
+
+.porcentagem{
+  font-size: 0.7rem;
 }
 
 .container-graficoPizza{
