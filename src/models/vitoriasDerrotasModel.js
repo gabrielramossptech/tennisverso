@@ -2,19 +2,17 @@ var database = require("../database/config")
 
 function listar(idUsuario) {
     var instrucao = `
-    select 
-    round(sum(p.resultado = 'vitoria') / count(*) * 100) as percentualVitorias,
-    (select count(*) from partida where fkUsuario = ${idUsuario}) as partidasTotais,
-    count(*) as partidasJogadas7Dias
-from (
-    select date(dtPartida) as data
-    from partida
-    where fkUsuario = ${idUsuario}
-    group by date(dtPartida)
-    order by data desc
-    limit 7
-) as ultimos7dias
-join partida p on date(p.dtPartida) = ultimos7dias.data and p.fkUsuario = ${idUsuario};
+    select
+    round(sum(resultado = 'vitoria') / count(*) * 100) as percentualVitorias,
+    sum(resultado = 'vitoria') as partidasTotais,
+    (
+        select count(*) 
+        from partida 
+        where fkUsuario = ${idUsuario}
+        and date(dtPartida) between current_date - interval 6 day and current_date
+    ) as partidasJogadas7Dias
+from partida
+where fkUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
