@@ -153,27 +153,42 @@
             });
     }
 
-    var listaResposta1 = []
-    var listaResposta2 = []
-    var resposta2 = []
-    var resposta3 = []
+    var listaResposta1Datas = []
+    var listaResposta1Percentual = []
+
+    var listaResposta2Datas = []
+    var listaResposta2QntPartidas = []
+
+    var listaResposta3Data = []
+    var listaResposta3Vitorias = []
+    var listaResposta3Derrotas = []
+
     function obterGraficos() {
 
         fetch(`/vitoriasderrotas/listarGrafico/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta1) {
                     console.log(resposta1)
-                    listaResposta1 = resposta1
+
+                    for (var i = 0; i < 7; i++) {
+                        if (resposta1[i]) {
+                            listaResposta1Datas.push(resposta1[i].data)
+                            listaResposta1Percentual.push(resposta1[i].percentualVitorias)
+                        } else {
+                            listaResposta1Datas.push("Sem data")
+                            listaResposta1Percentual.push("Sem data")
+                        }
+                    }
 
                     const ctx = document.getElementById('myChart');
 
                     new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [listaResposta1[0].data, listaResposta1[1].data, listaResposta1[2].data, listaResposta1[3].data, listaResposta1[4].data, listaResposta1[5].data, listaResposta1[6].data],
+                            labels: listaResposta1Datas,
                             datasets: [{
                                 label: '% de vitórias',
-                                data: [listaResposta1[0].percentualVitorias, listaResposta1[1].percentualVitorias, listaResposta1[2].percentualVitorias, listaResposta1[3].percentualVitorias, listaResposta1[4].percentualVitorias, listaResposta1[5].percentualVitorias, listaResposta1[6].percentualVitorias],
+                                data: [listaResposta1Percentual[0], listaResposta1Percentual[1], listaResposta1Percentual[2], listaResposta1Percentual[3], listaResposta1Percentual[4], listaResposta1Percentual[5], listaResposta1Percentual[6]],
                                 borderWidth: 2,
                                 borderColor: '#457b9d',
                                 backgroundColor: '#457b9d75',
@@ -201,17 +216,26 @@
             if (response.ok) {
                 response.json().then(function (resposta2) {
                     console.log(resposta2)
-                    listaResposta2 = resposta2
+
+                    for (var i = 0; i < 7; i++) {
+                        if (resposta2[i]) {
+                            listaResposta2Datas.push(resposta2[i].data)
+                            listaResposta2QntPartidas.push(resposta2[i].qntPartidas)
+                        } else {
+                            listaResposta2Datas.push("Sem data")
+                            listaResposta2QntPartidas.push("Sem partida")
+                        }
+                    }
 
                     const ctx2 = document.getElementById('myChart2');
 
                     new Chart(ctx2, {
                         type: 'bar',
                         data: {
-                            labels: [listaResposta2[0].data, listaResposta2[1].data, listaResposta2[2].data, listaResposta2[3].data, listaResposta2[4].data, listaResposta2[5].data, listaResposta2[6].data],
+                            labels: [listaResposta2Datas[0], listaResposta2Datas[1], listaResposta2Datas[2], listaResposta2Datas[3], listaResposta2Datas[4], listaResposta2Datas[5], listaResposta2Datas[6]],
                             datasets: [{
                                 label: 'Partidas jogadas',
-                                data: [listaResposta2[0].qntPartidas, listaResposta2[1].qntPartidas, listaResposta2[2].qntPartidas, listaResposta2[3].qntPartidas, listaResposta2[4].qntPartidas, listaResposta2[5].qntPartidas, listaResposta2[6].qntPartidas],
+                                data: [listaResposta2QntPartidas[0], listaResposta2QntPartidas[1], listaResposta2QntPartidas[2], listaResposta2QntPartidas[3], listaResposta2QntPartidas[4], listaResposta2QntPartidas[5], listaResposta2QntPartidas[6]],
                                 borderWidth: 2,
                                 borderColor: '#457b9d',
                                 backgroundColor: '#457b9d75'
@@ -239,7 +263,18 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(resposta)
-                    resposta3 = resposta
+
+                    for (var i = 0; i < 7; i++) {
+                        if (resposta[i]) {
+                            listaResposta3Data.push(resposta[i].data)
+                            listaResposta3Vitorias.push(resposta[i].vitorias)
+                            listaResposta3Derrotas.push(resposta[i].derrotas)
+                        } else {
+                            listaResposta3Data.push('Sem data')
+                            listaResposta3Vitorias.push(0)
+                            listaResposta3Derrotas.push(0)
+                        }
+                    }
 
 
                     const ctx3 = document.getElementById('myChart3');
@@ -247,18 +282,18 @@
                     new Chart(ctx3, {
                         type: 'bar',
                         data: {
-                            labels: [resposta[0].data, "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
+                            labels: [listaResposta3Data[0], listaResposta3Data[1], listaResposta3Data[2], listaResposta3Data[3], listaResposta3Data[4], listaResposta3Data[5], listaResposta3Data[6]],
                             datasets: [
                                 {
                                     label: "Vitórias",
-                                    data: [resposta[0].vitorias, resposta[1].vitorias, resposta[2].vitorias, resposta[3].vitorias, resposta[4].vitorias, resposta[5].vitorias, resposta[6].vitorias],
+                                    data: [listaResposta3Vitorias[0], listaResposta3Vitorias[1], listaResposta3Vitorias[2], listaResposta3Vitorias[3], listaResposta3Vitorias[4], listaResposta3Vitorias[5], listaResposta3Vitorias[6]],
                                     borderWidth: 2,
                                     borderColor: '#2ecc71',
                                     backgroundColor: '#2ecc7155',
                                 },
                                 {
                                     label: "Derrotas",
-                                    data: [resposta[0].derrotas, resposta[1].derrotas, resposta[2].derrotas, resposta[3].derrotas, resposta[4].derrotas, resposta[5].derrotas, resposta[6].derrotas],
+                                    data: [listaResposta3Derrotas[0], listaResposta3Derrotas[1], listaResposta3Derrotas[2], listaResposta3Derrotas[3], listaResposta3Derrotas[4], listaResposta3Derrotas[5], listaResposta3Derrotas[6]],
                                     borderWidth: 2,
                                     borderColor: '#e63946',
                                     backgroundColor: '#8b000075',
