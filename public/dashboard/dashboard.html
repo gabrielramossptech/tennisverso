@@ -64,8 +64,8 @@
 
             <div class="container-indicadores">
                 <div class="indicador" id="container-rank">
-                    <h1>Rank:</h1>
-                    <h3 id="rank"></h3>
+                    <h1 id="rank" style="font-size: 1.43rem"></h1>
+                    <h3>Rank atual</h3>
                 </div>
 
                 <div class="indicador" id="container-percentualVitorias">
@@ -75,7 +75,7 @@
 
                 <div class="indicador" id="container-vitoriasTotais">
                     <h1 id="partidasTotais">Carregando..</h1>
-                    <h3>Vitórias totais</h3>
+                    <h3>Partidas totais</h3>
                 </div>
 
                 <div class="indicador" id="container-partidas">
@@ -94,11 +94,11 @@
                     </div>
                     <div class="ranks">
                         <h2>Ranks:</h2>
-                        <p>🎾 Bolinha de saída <span class="porcentagem">(0% - 19%)</span></p>
-                        <p>🥉 Aprendiz da rede <span class="porcentagem">(20% - 39%)</span></p>
-                        <p>🥈 Domador de sets <span class="porcentagem">(40% - 59%)</span></p>
-                        <p>🥇 Arquiteto da vitória <span class="porcentagem">(60% - 79%)</span></p>
-                        <p>🐐 Lenda do TenisVerso <span class="porcentagem">(80% - 100%)</span></p>
+                        <p>🎾 Bolinha <span class="porcentagem">(0% - 19%)</span></p>
+                        <p>🥉 Aprendiz <span class="porcentagem">(20% - 39%)</span></p>
+                        <p>🥈 Domador <span class="porcentagem">(40% - 59%)</span></p>
+                        <p>🥇 Mestre <span class="porcentagem">(60% - 79%)</span></p>
+                        <p>🐐 TenisVerso GOAT <span class="porcentagem">(80% - 100%)</span></p>
                     </div>
                 </div>
                 <div class="container-graficoLinha">
@@ -170,19 +170,24 @@
                     }
 
                     if (porcentagemVitoria < 20) {
-                        rank.innerHTML = '🎾 Bolinha de saída'
+                        rank.innerHTML = '🎾Bolinha'
+                        b_usuario.innerHTML += '🎾'
                         ccRank.classList.add('vermelho')
                     } else if (porcentagemVitoria < 40) {
-                        rank.innerHTML = '🥉 Aprendiz da rede'
+                        rank.innerHTML = '🥉Aprendiz'
+                        b_usuario.innerHTML += '🥉'
                         cRank.classList.add('amarelo')
                     } else if (porcentagemVitoria < 60) {
-                        rank.innerHTML = '🥈 Domador de sets'
+                        rank.innerHTML = '🥈Domador'
+                        b_usuario.innerHTML += '🥈'
                         cRank.classList.add('amarelo')
                     } else if (porcentagemVitoria < 80) {
-                        rank.innerHTML = '🥇 Arquiteto da vitória'
+                        rank.innerHTML = '🥇Mestre'
+                        b_usuario.innerHTML += '🥇'
                         cRank.classList.add('verde')
                     } else if (porcentagemVitoria < 100) {
-                        rank.innerHTML = '🐐 Lenda do TenisVerso'
+                        rank.innerHTML = '🐐TenisVerso GOAT'
+                        b_usuario.innerHTML += '🐐'
                         cRank.classList.add('verde')
                     }
 

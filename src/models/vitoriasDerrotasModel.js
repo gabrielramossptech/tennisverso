@@ -4,7 +4,7 @@ function listar(idUsuario) {
     var instrucao = `
     select
     round(sum(resultado = 'vitoria') / count(*) * 100) as percentualVitorias,
-    sum(resultado = 'vitoria') as partidasTotais,
+    count(*) as partidasTotais,
     (
         select count(*) 
         from partida 
