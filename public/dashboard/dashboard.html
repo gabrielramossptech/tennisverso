@@ -52,6 +52,10 @@
                 <h3>Partidas</h3>
             </a>
 
+            <a href="./configuracoes.html">
+                <h3>Perfil</h3>
+            </a>
+
             <div class="btn-logout" onclick="limparSessao()">
                 <h3><img src="../assets/icon/logout.svg" alt="" srcset="">Sair</h3>
             </div>
@@ -149,7 +153,7 @@
                         cPercentualVitorias.classList.add('vermelho')
                     } else if (resposta[0].percentualVitorias < 55) {
                         cPercentualVitorias.classList.add('amarelo')
-                    } else if(resposta[0].percentualVitorias <= 100){
+                    } else if (resposta[0].percentualVitorias <= 100) {
                         cPercentualVitorias.classList.add('verde')
                     }
 
@@ -161,11 +165,11 @@
                         cVitoriasTotais.classList.add('verde');
                     }
 
-                    if(resposta[0].partidasJogadas7Dias < 2){
+                    if (resposta[0].partidasJogadas7Dias < 2) {
                         cPartidas.classList.add('vermelho')
-                    }else if(resposta[0].partidasJogadas7Dias < 4){
+                    } else if (resposta[0].partidasJogadas7Dias < 4) {
                         cPartidas.classList.add('amarelo')
-                    }else{
+                    } else {
                         cPartidas.classList.add('verde')
                     }
 
