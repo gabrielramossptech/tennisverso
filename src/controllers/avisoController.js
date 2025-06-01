@@ -82,10 +82,14 @@ function publicar(req, res) {
 
 
 function editar(req, res) {
-    var novaDescricao = req.body.descricao;
+    var fkQuadra = req.body.fkQuadra;
+    var gamesUsuario = req.body.gamesUsuario;
+    var gamesAdversario = req.body.gamesAdversario;
+    var dtPartida = req.body.dtPartida;
+    var resultado = req.body.resultado;
     var idAviso = req.params.idAviso;
 
-    avisoModel.editar(novaDescricao, idAviso)
+    avisoModel.editar(fkQuadra, gamesUsuario, gamesAdversario, dtPartida, resultado, idAviso)
         .then(
             function (resultado) {
                 res.json(resultado);

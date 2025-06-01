@@ -64,7 +64,7 @@
 
             <div class="container-indicadores">
                 <div class="indicador" id="container-rank">
-                    <h1 id="rank" style="font-size: 1.43rem"></h1>
+                    <h1 id="rank" style="font-size: 1.6rem"></h1>
                     <h3>Rank atual</h3>
                 </div>
 
@@ -149,7 +149,7 @@
                         cPercentualVitorias.classList.add('vermelho')
                     } else if (resposta[0].percentualVitorias < 55) {
                         cPercentualVitorias.classList.add('amarelo')
-                    } else if(resposta[0].percentualVitorias < 100){
+                    } else if(resposta[0].percentualVitorias <= 100){
                         cPercentualVitorias.classList.add('verde')
                     }
 
@@ -171,23 +171,18 @@
 
                     if (porcentagemVitoria < 20) {
                         rank.innerHTML = '🎾Bolinha'
-                        b_usuario.innerHTML += '🎾'
-                        ccRank.classList.add('vermelho')
+                        cRank.classList.add('vermelho')
                     } else if (porcentagemVitoria < 40) {
                         rank.innerHTML = '🥉Aprendiz'
-                        b_usuario.innerHTML += '🥉'
                         cRank.classList.add('amarelo')
                     } else if (porcentagemVitoria < 60) {
                         rank.innerHTML = '🥈Domador'
-                        b_usuario.innerHTML += '🥈'
                         cRank.classList.add('amarelo')
                     } else if (porcentagemVitoria < 80) {
                         rank.innerHTML = '🥇Mestre'
-                        b_usuario.innerHTML += '🥇'
                         cRank.classList.add('verde')
-                    } else if (porcentagemVitoria < 100) {
+                    } else if (porcentagemVitoria <= 100) {
                         rank.innerHTML = '🐐TenisVerso GOAT'
-                        b_usuario.innerHTML += '🐐'
                         cRank.classList.add('verde')
                     }
 
