@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TennisVerso | Início</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/tenisdle.css" />
 
-    <!-- Roboto -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TennisVerso | Início</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/tenisdle.css" />
 
-    <!-- Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header>
-      <a href="./index.html"
-        ><img src="./assets/icon/raquete.png" alt="Logo" />TenisVerso</a
-      >
+  <!-- Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
 
-      <nav>
-        <ul>
-          <li><a href="./index.html">Início</a></li>
-          <li><a href="./artigos.html">Artigos</a></li>
-          <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
-          <li><a href="./login.html">Entrar</a></li>
-        </ul>
-      </nav>
-    </header>
+  <!-- Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+</head>
 
-    <main>
-      <div class="container">
-        <h1>Quem é o tenista?</h1>
-        <p>Digite o nome de um dos tenistas e tente adivinhar!</p>
+<body>
+  <header>
+    <a href="./index.html"><img src="./assets/icon/raquete.png" alt="Logo" />TenisVerso</a>
 
-        <div class="inputs">
-          <input
-            type="text"
-            id="input_tentativa"
-            placeholder="Ex: João Fonseca"
-          />
-          <button onclick="tentar()">Adivinhar</button>
-        </div>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./artigos.html">Artigos</a></li>
+        <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
+        <li><a href="./login.html">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <table id="tabelaTentativas">
-          <thead id="thead">
-            <tr>
-              <th>Nome</th>
-              <th>Idade</th>
-              <th>Nacionalidade</th>
-              <th>Gênero</th>
-              <th>Grand Slams</th>
-            </tr>
-          </thead>
-          <tbody id="tentativas"></tbody>
-        </table>
+  <main>
+    <div class="container">
+      <h1>Quem é o tenista?</h1>
+      <p>Digite o nome de um dos tenistas e tente adivinhar!</p>
+      <p>Tentativas: <span id="span_tentativas"></span></p>
 
-        <div id="mensagemFinal">🎉 Parabéns, você ganhou!</div>
-
-        <button onclick="reiniciar()" id="reiniciar">Tente novamente</button>
+      <div class="inputs">
+        <input type="text" id="input_tentativa" placeholder="Ex: João Fonseca" />
+        <button onclick="tentar()">Adivinhar</button>
       </div>
-    </main>
-  </body>
+
+      <table id="tabelaTentativas">
+        <thead id="thead">
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Nacionalidade</th>
+            <th>Gênero</th>
+            <th>Grand Slams</th>
+          </tr>
+        </thead>
+        <tbody id="tentativas"></tbody>
+      </table>
+
+      <div id="mensagemFinal">
+        🎉 Parabéns, você ganhou!
+        <p>Pontuação: <span id="span_pontuacao"></span></p>
+      </div>
+
+      <button onclick="reiniciar()" id="reiniciar">Tente novamente</button>
+    </div>
+  </main>
+</body>
+
 </html>
 
 <script>
@@ -83,6 +81,10 @@
     ["Serena Williams", 41, "Americana", "Feminino", 23],
     ["Carlos Alcaraz", 21, "Espanhol", "Masculino", 2],
   ];
+
+  var pontuacao = 0;
+  var chances = 5
+  span_tentativas.innerHTML = chances
 
   // escolhendo um tenista aleatório
   let alvo = tenistas[Math.floor(Math.random() * tenistas.length)];
@@ -104,6 +106,9 @@
     mensagemFinal.innerHTML = "";
     tbody.innerHTML = "";
     arrayTentativas = [];
+    pontuacao = 0;
+    chances = 5;
+    span_tentativas.innerHTML = chances
     alvo = tenistas[Math.floor(Math.random() * tenistas.length)];
     acertos = {
       nome: false,
@@ -112,6 +117,11 @@
       genero: false,
       grandSlams: false,
     };
+    var mensagem = document.getElementById("mensagemFinal");
+    mensagem.style.display = "none";
+    
+    var botaoResetar = document.getElementById("reiniciar");
+    botaoResetar.style.display = "none";
   }
 
   // função de tentativa
@@ -119,7 +129,6 @@
     let tentativa = input_tentativa.value.trim(); //.trim remove espaços
     let tentativas = "";
     let validacaoExisteTenista = false;
-    let indexTenista = -1;
 
     // verificando se o tenista existe
     for (let i = 0; i < tenistas.length; i++) {
@@ -144,6 +153,10 @@
       if (genero == alvo[3]) acertos.genero = true;
       if (torneio == alvo[4]) acertos.grandSlams = true;
 
+      // diminuindo as tentativas
+      chances--
+      span_tentativas.innerHTML = chances
+
       if (
         acertos.nome &&
         acertos.idade &&
@@ -156,6 +169,24 @@
 
         var botaoResetar = document.getElementById("reiniciar");
         botaoResetar.style.display = "block";
+
+        // sistema de pontuação
+        if (chances == 4) {
+          pontuacao = chances * 1250
+          span_pontuacao.innerHTML = pontuacao
+        }else if(chances == 3){
+          pontuacao = chances * 1000
+          span_pontuacao.innerHTML = pontuacao
+        }else if(chances == 2){
+          pontuacao = chances * 750
+          span_pontuacao.innerHTML = pontuacao
+        }else if(chances == 1){
+          pontuacao = chances * 500
+          span_pontuacao.innerHTML = pontuacao
+        }else{
+          pontuacao = chances * 250
+          span_pontuacao.innerHTML = pontuacao
+        }
       }
 
       // adicionando a tentativa numa array
@@ -176,28 +207,23 @@
 
         tentativas += `
             <tr class="tentativa">
-                <th class="ceulaNome ${
-                  acertos.nome && tentativaAtual[0] == alvo[0] ? "certa" : ""
-                }">
+                <th class="ceulaNome ${acertos.nome && tentativaAtual[0] == alvo[0] ? "certa" : ""
+          }">
                     ${tentativaAtual[0]}</th>
-                <th class="ceulaIdade ${
-                  acertos.idade && tentativaAtual[1] == alvo[1] ? "certa" : ""
-                }">
+                <th class="ceulaIdade ${acertos.idade && tentativaAtual[1] == alvo[1] ? "certa" : ""
+          }">
                     ${tentativaAtual[1]}</th>
-                <th class="ceulaNacionalidade ${
-                  acertos.nacionalidade && tentativaAtual[2] == alvo[2]
-                    ? "certa"
-                    : ""
-                }">${tentativaAtual[2]}</th>
-                <th class="ceulagenero ${
-                  acertos.genero && tentativaAtual[3] == alvo[3] ? "certa" : ""
-                }">
+                <th class="ceulaNacionalidade ${acertos.nacionalidade && tentativaAtual[2] == alvo[2]
+            ? "certa"
+            : ""
+          }">${tentativaAtual[2]}</th>
+                <th class="ceulagenero ${acertos.genero && tentativaAtual[3] == alvo[3] ? "certa" : ""
+          }">
                     ${tentativaAtual[3]}</th>
-                <th class="ceulaTorneio ${
-                  acertos.grandSlams && tentativaAtual[4] == alvo[4]
-                    ? "certa"
-                    : ""
-                }">
+                <th class="ceulaTorneio ${acertos.grandSlams && tentativaAtual[4] == alvo[4]
+            ? "certa"
+            : ""
+          }">
                     ${tentativaAtual[4]}</th>
             </tr>`;
 
