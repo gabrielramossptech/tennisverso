@@ -43,8 +43,53 @@
       <p>Tentativas: <span id="span_tentativas"></span></p>
 
       <div class="inputs">
+        <button id="btnRegras" title="Clique para ver as regras">?</button>
+        <button id="btnTenistas" title="Clique para ver os tenistas">T</button>
         <input type="text" id="input_tentativa" placeholder="Ex: João Fonseca" />
         <button onclick="tentar()">Adivinhar</button>
+      </div>
+
+      <div id="modalTenistas" class="modal">
+        <div class="modal-conteudo" id="tenistas">
+          <span id="fecharModalTenistas" class="fechar">x</span>
+          <h2>Tenistas disponíves</h2>
+          <br>
+          <ol>
+            <li>Andy Murray</li>
+            <li>Beatriz Haddad Maia</li>
+            <li>Carlos Alcaraz</li>
+            <li>Gustavo Kuerten</li>
+            <li>João Fonseca</li>
+            <li>Maria Sharapova</li>
+            <li>Novak Djokovic</li>
+            <li>Rafael Nadal</li>
+            <li>Roger Federer</li>
+            <li>Serena Williams</li>
+          </ol>
+        </div>
+      </div>
+
+      <div id="modalRegras" class="modal">
+        <div class="modal-conteudo">
+          <span id="fecharModal" class="fechar">x</span>
+          <h2>Regras do Jogo</h2>
+          <h3>Objetivo:</h3>
+          <p><strong>Adivinhar o tenista secreto</strong> em até 6 tentativas.</p>
+          <br>
+          <h3>Campos:</h3>
+          <p><strong>Nome, idade, nacionalidade, gênero</strong> e <strong>Grand Slams</strong>.</p>
+          <br>
+          <h3>Feedback:</h3>
+          <p><span style="color:green;"><strong>Verde:</strong></span> certo e na posição certa.</p>
+          <p><span style="color:orange;"><strong>Amarelo:</strong></span> certo, mas posição errada.</p>
+          <p><span style="color:red;"><strong>Vermelho:</strong></span> errado.</p>
+          <br>
+          <h3>Perde se:</h3>
+          <p>Acabar as tentativas sem acertar.</p>
+          <br>
+          <h3>Dica:</h3>
+          <p>Use as "pistas" pra melhorar os palpites.</p>
+        </div>
       </div>
 
       <table id="tabelaTentativas">
@@ -73,17 +118,65 @@
 </html>
 
 <script>
+
+  // criando as variáveis para "controlar" o modal
+  const btnRegras = document.getElementById('btnRegras');
+  const modalRegras = document.getElementById('modalRegras');
+  const fecharModal = document.getElementById('fecharModal');
+
+  // adicionando evento "click" usando uma função anônima
+  btnRegras.addEventListener('click', () => {
+    modalRegras.style.display = 'block';
+  });
+
+  fecharModal.addEventListener('click', () => {
+    modalRegras.style.display = 'none';
+  });
+
+  // adicionando um evento de clique na janela inteira (window)
+  window.addEventListener('click', (event) => {
+    if (event.target == modalRegras) {
+      modalRegras.style.display = 'none';
+    }
+  });
+
+  // manipulação do modal dos tenistas disponíveis, seguindo a mesma lógica do primeiro modal
+  const btnTenistas = document.getElementById('btnTenistas');
+  const modalTenistas = document.getElementById('modalTenistas');
+  const fecharModalTenistas = document.getElementById('fecharModalTenistas');
+
+  btnTenistas.addEventListener('click', () => {
+    modalTenistas.style.display = 'block';
+  });
+
+  fecharModalTenistas.addEventListener('click', () => {
+    modalTenistas.style.display = 'none';
+  });
+
+  // Fecha modal clicando fora da caixa
+  window.addEventListener('click', (event) => {
+    if (event.target == modalTenistas) {
+      modalTenistas.style.display = 'none';
+    }
+  });
+
+
   // array com os tenistas possíveis
   const tenistas = [
+    ["Roger Federer", 41, "Suíço", "Masculino", 20],
     ["Rafael Nadal", 37, "Espanhol", "Masculino", 22],
-    ["Roger Federer", 42, "Suíço", "Masculino", 20],
     ["Novak Djokovic", 36, "Sérvio", "Masculino", 24],
-    ["Serena Williams", 41, "Americana", "Feminino", 23],
+    ["Andy Murray", 35, "Britânico", "Masculino", 3],
     ["Carlos Alcaraz", 21, "Espanhol", "Masculino", 2],
+    ["Gustavo Kuerten", 46, "Brasileiro", "Masculino", 3],
+    ["João Fonseca", 21, "Brasileiro", "Masculino", 0],
+    ["Serena Williams", 41, "Americana", "Feminino", 23],
+    ["Maria Sharapova", 36, "Russa", "Feminino", 5],
+    ["Beatriz Haddad Maia", 27, "Brasileira", "Feminino", 1],
   ];
 
   var pontuacao = 0;
-  var chances = 5
+  var chances = 7
   span_tentativas.innerHTML = chances
 
   // escolhendo um tenista aleatório
@@ -119,7 +212,7 @@
     };
     var mensagem = document.getElementById("mensagemFinal");
     mensagem.style.display = "none";
-    
+
     var botaoResetar = document.getElementById("reiniciar");
     botaoResetar.style.display = "none";
   }
@@ -157,6 +250,7 @@
       chances--
       span_tentativas.innerHTML = chances
 
+      // se tudo estiver true, então exibir mensagem e reiniciar jogo aparece
       if (
         acertos.nome &&
         acertos.idade &&
@@ -171,22 +265,24 @@
         botaoResetar.style.display = "block";
 
         // sistema de pontuação
-        if (chances == 4) {
-          pontuacao = chances * 1250
-          span_pontuacao.innerHTML = pontuacao
-        }else if(chances == 3){
-          pontuacao = chances * 1000
-          span_pontuacao.innerHTML = pontuacao
-        }else if(chances == 2){
-          pontuacao = chances * 750
-          span_pontuacao.innerHTML = pontuacao
-        }else if(chances == 1){
-          pontuacao = chances * 500
-          span_pontuacao.innerHTML = pontuacao
-        }else{
-          pontuacao = chances * 250
-          span_pontuacao.innerHTML = pontuacao
+        if (chances + 1 == 7) {
+          pontuacao = 2000;
+        } else if (chances + 1 == 6) {
+          pontuacao = 1750;
+        } else if (chances + 1 == 5) {
+          pontuacao = 1500;
+        } else if (chances + 1 == 4) {
+          pontuacao = 1250;
+        } else if (chances + 1 == 3) {
+          pontuacao = 1000;
+        } else if (chances + 1 == 2) {
+          pontuacao = 750;
+        } else if (chances + 1 == 1) {
+          pontuacao = 500;
+        } else {
+          pontuacao = 250;
         }
+        span_pontuacao.innerHTML = pontuacao;
       }
 
       // adicionando a tentativa numa array
@@ -205,6 +301,7 @@
       for (let i = arrayTentativas.length - 1; i >= 0; i--) {
         let tentativaAtual = arrayTentativas[i];
 
+        // adicionando as tentativas com operador ternário pra facilitar
         tentativas += `
             <tr class="tentativa">
                 <th class="ceulaNome ${acertos.nome && tentativaAtual[0] == alvo[0] ? "certa" : ""
