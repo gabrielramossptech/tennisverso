@@ -55,9 +55,10 @@
               <p>Nome:</p>
               <input id="nome_input" type="text" placeholder="Seu nome" />
             </div>
-            <div class="campo">
+            <div class="campo" id="campo_email">
               <p>E-mail:</p>
-              <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+              <input id="email_input" type="text" placeholder="meuemail@provedor.com" on="verificarEmail()"/>
+              <p style="color: #f00; display: none;" id="p_validarEmail">O email deve conter @</p>
             </div>
             <div class="campo">
               <p>Senha:</p>
@@ -101,6 +102,17 @@
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaEmpresasCadastradas = [];
 
+  const inputEmail = document.getElementById('email_input');
+  inputEmail.addEventListener('focusout', function(){
+    var emailVar = email_input.value;
+
+    if(!emailVar.includes('@')){
+      p_validarEmail.style.display = 'block'
+    }else{
+      p_validarEmail.style.display = 'none'
+    }
+  })
+
   function cadastrar() {
     // aguardar();
 
@@ -129,6 +141,13 @@
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
+    }
+
+    if(!emailVar.includes('@')){
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Atenção! O email deve ter @."
+      return false
     }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
