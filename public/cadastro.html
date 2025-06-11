@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>TenisVerso | Cadastro</title>
+  <link rel="shortcut icon" href="./assets/imgs/iconeTenis.png">
 
   <script src="./js/sessao.js"></script>
 
@@ -17,26 +18,28 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body onload="listar()">
   <!--header inicio-->
-   <header>
-        <a href="./index.html"><img src="./assets/icon/raquete.png" alt="Logo">TenisVerso</a>
+  <header>
+    <a href="./index.html"><img src="./assets/icon/raquete.png" alt="Logo">TenisVerso</a>
 
-        <nav>
-            <ul>
-                <li><a href="./index.html">Início</a></li>
-                <li><a href="./artigos.html">Artigos</a></li>
-                <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
-                <li><a href="./login.html">Entrar</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./artigos.html">Artigos</a></li>
+        <li><a href="./tenisdle.html">Adivinhe o tenista</a></li>
+        <li><a href="./login.html">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
   <!--header fim-->
 
-  
+
   <main>
     <aside>
       <!-- <img src="./assets/imgs/quadraCadastro.png" alt=""> -->
@@ -44,9 +47,9 @@
     <section class="cadastro">
 
       <div class="container-cadastro">
-  
+
       </div>
-  
+
       <div class="container">
         <div class="card card-cadastro">
           <h2>Crie sua conta!</h2>
@@ -57,7 +60,7 @@
             </div>
             <div class="campo" id="campo_email">
               <p>E-mail:</p>
-              <input id="email_input" type="text" placeholder="meuemail@provedor.com" on="verificarEmail()"/>
+              <input id="email_input" type="text" placeholder="meuemail@provedor.com" on="verificarEmail()" />
               <p style="color: #f00; display: none;" id="p_validarEmail">O email deve conter @</p>
             </div>
             <div class="campo">
@@ -86,7 +89,7 @@
           <div id="div_aguardar" class="loading-div">
             <img src="./assets/circle-loading.gif" id="loading-gif" />
           </div>
-          
+
           <div id="div_erros_login"></div>
         </div>
       </div>
@@ -103,12 +106,12 @@
   let listaEmpresasCadastradas = [];
 
   const inputEmail = document.getElementById('email_input');
-  inputEmail.addEventListener('focusout', function(){
+  inputEmail.addEventListener('focusout', function () {
     var emailVar = email_input.value;
 
-    if(!emailVar.includes('@')){
+    if (!emailVar.includes('@')) {
       p_validarEmail.style.display = 'block'
-    }else{
+    } else {
       p_validarEmail.style.display = 'none'
     }
   })
@@ -143,7 +146,7 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    if(!emailVar.includes('@')){
+    if (!emailVar.includes('@')) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Atenção! O email deve ter @."
